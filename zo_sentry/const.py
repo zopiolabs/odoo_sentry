@@ -79,41 +79,41 @@ def get_sentry_logging(level=DEFAULT_LOG_LEVEL):
 def get_sentry_options():
     res = [
         SentryOption("dsn", "", str.strip),
-        SentryOption("transport", DEFAULT_OPTIONS["transport"], select_transport),
+        SentryOption("transport", DEFAULT_OPTIONS.get("transport", HttpTransport), select_transport),
         SentryOption("logging_level", DEFAULT_LOG_LEVEL, get_sentry_logging),
-        SentryOption("with_locals", DEFAULT_OPTIONS["with_locals"], None),
+        SentryOption("with_locals", DEFAULT_OPTIONS.get("with_locals", True), None),
         SentryOption(
-            "max_breadcrumbs", DEFAULT_OPTIONS["max_breadcrumbs"], to_int_if_defined
+            "max_breadcrumbs", DEFAULT_OPTIONS.get("max_breadcrumbs", 100), to_int_if_defined
         ),
-        SentryOption("release", DEFAULT_OPTIONS["release"], None),
-        SentryOption("environment", DEFAULT_OPTIONS["environment"], None),
-        SentryOption("server_name", DEFAULT_OPTIONS["server_name"], None),
-        SentryOption("shutdown_timeout", DEFAULT_OPTIONS["shutdown_timeout"], None),
-        SentryOption("integrations", DEFAULT_OPTIONS["integrations"], None),
+        SentryOption("release", DEFAULT_OPTIONS.get("release", None), None),
+        SentryOption("environment", DEFAULT_OPTIONS.get("environment", None), None),
+        SentryOption("server_name", DEFAULT_OPTIONS.get("server_name", None), None),
+        SentryOption("shutdown_timeout", DEFAULT_OPTIONS.get("shutdown_timeout", None), None),
+        SentryOption("integrations", DEFAULT_OPTIONS.get("integrations", None), None),
         SentryOption(
-            "in_app_include", DEFAULT_OPTIONS["in_app_include"], split_multiple
-        ),
-        SentryOption(
-            "in_app_exclude", DEFAULT_OPTIONS["in_app_exclude"], split_multiple
+            "in_app_include", DEFAULT_OPTIONS.get("in_app_include", []), split_multiple
         ),
         SentryOption(
-            "default_integrations", DEFAULT_OPTIONS["default_integrations"], None
+            "in_app_exclude", DEFAULT_OPTIONS.get("in_app_exclude", []), split_multiple
         ),
-        SentryOption("dist", DEFAULT_OPTIONS["dist"], None),
         SentryOption(
-            "sample_rate", DEFAULT_OPTIONS["sample_rate"], to_float_if_defined
+            "default_integrations", DEFAULT_OPTIONS.get("default_integrations", True), None
         ),
-        SentryOption("send_default_pii", DEFAULT_OPTIONS["send_default_pii"], None),
-        SentryOption("http_proxy", DEFAULT_OPTIONS["http_proxy"], None),
-        SentryOption("https_proxy", DEFAULT_OPTIONS["https_proxy"], None),
+        SentryOption("dist", DEFAULT_OPTIONS.get("dist", None), None),
+        SentryOption(
+            "sample_rate", DEFAULT_OPTIONS.get("sample_rate", 1.0), to_float_if_defined
+        ),
+        SentryOption("send_default_pii", DEFAULT_OPTIONS.get("send_default_pii", False), None),
+        SentryOption("http_proxy", DEFAULT_OPTIONS.get("http_proxy", None), None),
+        SentryOption("https_proxy", DEFAULT_OPTIONS.get("https_proxy", None), None),
         SentryOption("ignore_exceptions", DEFAULT_IGNORED_EXCEPTIONS, split_multiple),
-        SentryOption("request_bodies", DEFAULT_OPTIONS["request_bodies"], None),
-        SentryOption("attach_stacktrace", DEFAULT_OPTIONS["attach_stacktrace"], None),
-        SentryOption("ca_certs", DEFAULT_OPTIONS["ca_certs"], None),
-        SentryOption("propagate_traces", DEFAULT_OPTIONS["propagate_traces"], None),
+        SentryOption("request_bodies", DEFAULT_OPTIONS.get("request_bodies", "medium"), None),
+        SentryOption("attach_stacktrace", DEFAULT_OPTIONS.get("attach_stacktrace", False), None),
+        SentryOption("ca_certs", DEFAULT_OPTIONS.get("ca_certs", None), None),
+        SentryOption("propagate_traces", DEFAULT_OPTIONS.get("propagate_traces", True), None),
         SentryOption(
             "traces_sample_rate",
-            DEFAULT_OPTIONS["traces_sample_rate"],
+            DEFAULT_OPTIONS.get("traces_sample_rate", None),
             to_float_if_defined,
         ),
     ]
