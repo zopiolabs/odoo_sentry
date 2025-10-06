@@ -1,3 +1,4 @@
+* Zopio (https://zopio.com)
 * Mohammed Barsi <barsintod@gmail.com>
 * Andrius Preimantas <andrius@versada.eu>
 * Naglis Jonaitis <naglis@versada.eu>

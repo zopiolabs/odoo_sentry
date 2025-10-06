@@ -198,7 +198,7 @@ class TestClientSetup(TransactionCase):
     def test_undefined_to_int(self):
         self.assertIsNone(to_int_if_defined(""))
 
-    @patch("odoo.addons.sentry.hooks.get_odoo_commit", return_value=GIT_SHA)
+    @patch("odoo.addons.zo_sentry.hooks.get_odoo_commit", return_value=GIT_SHA)
     def test_config_odoo_dir(self, get_odoo_commit):
         self.patch_config({"sentry_odoo_dir": "/opt/odoo/core"})
         client = initialize_sentry(config)._client
@@ -209,7 +209,7 @@ class TestClientSetup(TransactionCase):
             "Failed to use 'sentry_odoo_dir' parameter appropriately",
         )
 
-    @patch("odoo.addons.sentry.hooks.get_odoo_commit", return_value=GIT_SHA)
+    @patch("odoo.addons.zo_sentry.hooks.get_odoo_commit", return_value=GIT_SHA)
     def test_config_release(self, get_odoo_commit):
         self.patch_config(
             {
